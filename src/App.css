@@ -4,3 +4,24 @@ body {
   font-family: "Poppins", cursive;
   background: #eaeff3;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+#root > div {
+  max-width: 1280px;
+  padding: 1rem;
+  margin: 0 auto;
+  color: #014770;
+}

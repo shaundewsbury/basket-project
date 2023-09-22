@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
+
+import { useLocalStorage } from "../utils/useLocalStorage";
 
 const ShoppingBasketContext = createContext({});
 
@@ -7,9 +9,7 @@ export const useShoppingBasket = () => {
 };
 
 export const ShoppingBasketProvider = ({ children }) => {
-  const [basketItems, setBasketItems] = useState([]);
-
-  console.log(basketItems);
+  const [basketItems, setBasketItems] = useLocalStorage("shopping-basket", []);
 
   const getItemQuantity = (id) => {
     return basketItems.find((item) => item.id === id)?.quantity || 0;
@@ -53,6 +53,11 @@ export const ShoppingBasketProvider = ({ children }) => {
     });
   };
 
+  const basketQuantity = basketItems.reduce(
+    (quantity, item) => item.quantity + quantity,
+    0
+  );
+
   return (
     <ShoppingBasketContext.Provider
       value={{
@@ -60,6 +65,8 @@ export const ShoppingBasketProvider = ({ children }) => {
         increaseBasketQuantity,
         decreaseBasketQuantity,
         removeFromBasket,
+        basketItems,
+        basketQuantity,
       }}
     >
       {children}

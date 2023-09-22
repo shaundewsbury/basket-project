@@ -3,6 +3,7 @@ import { useShoppingBasket } from "../context/shopping-basket-context";
 import { AiFillDelete } from "react-icons/ai";
 
 const StyledProductCard = styled.div`
+  align-self: start;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 0 #0147700d;

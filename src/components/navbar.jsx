@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { BsFillBasket3Fill } from "react-icons/bs";
+import { useShoppingBasket } from "../context/shopping-basket-context";
 
 const StyledNavBar = styled.nav`
   width: 100%;
@@ -12,12 +13,13 @@ const StyledNavBar = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
+    padding: 1rem;
     max-width: 1280px;
     margin: 0 auto;
 
-    h1 {
+    .logo {
       font-size: 1.5rem;
+      font-weight: 600;
 
       @media screen and (min-width: 768px) {
         font-size: 1.75rem;
@@ -67,15 +69,18 @@ const StyledNavBar = styled.nav`
 `;
 
 export const NavBar = () => {
+  const { basketQuantity } = useShoppingBasket();
   return (
     <StyledNavBar>
       <div className="navBar">
-        <h1>
+        <span className="logo">
           <a href="/">The Trainer Store</a>
-        </h1>
+        </span>
         <a className="basket" href="/basket">
           <BsFillBasket3Fill />
-          <div className="basketTotalIcon">3</div>
+          {basketQuantity > 0 && (
+            <div className="basketTotalIcon">{basketQuantity}</div>
+          )}
         </a>
       </div>
     </StyledNavBar>
